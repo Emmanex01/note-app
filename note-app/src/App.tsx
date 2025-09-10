@@ -1,5 +1,6 @@
 import './App.css'
 import Header from './components/Header'
+import Notes from './components/Notes'
 import SideBar from './components/SideBar'
 
 function App() {
@@ -13,9 +14,9 @@ function App() {
       {/* Right */}
       <div className=' w-3/4 p-4'>
         <Header/>
-        <div className='flex mt-4 bg-gray-200'>
-          <div className='w-1/3'>Left</div>
-          <div className='w-2/3'>Right</div>
+        <div className='flex flex-col md:flex-row mt-4'>
+          <Notes/>
+          <div className='md:w-2/3'>Right</div>
         </div>
       </div>
     </div>
