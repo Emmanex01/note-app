@@ -1,27 +1,42 @@
-import React from 'react'
+import React, { type SetStateAction } from 'react'
 import NewNoteButton from './NewNoteButton'
 
-const data = [
-  {
-    title: "Grocery list/ stores",
-    description: "Bread flour - instant Dry Extra - virgin Oil, 5 bananas shallot - 4 garlic cloves",
-    time: "1 min",
-    location: "san francisco"
-  },
-  {
-    title: "Grocery list/ stores",
-    description: "Bread flour - instant Dry Extra - virgin Oil, 5 bananas shallot - 4 garlic cloves",
-    time: "1 min",
-    location: "san francisco"
-  }
-];
+type Note = {
+  id: number,
+  title: string,
+  description: string,
+  time: string,
+  location: string,
+}
 
-const Notes = () => {
+type NotesProp = {
+  notes: any[];
+  setNote: React.Dispatch<SetStateAction<Note[]>>,
+  selectedNote: (Note | null)
+  setSelectedNote: React.Dispatch<SetStateAction<Note | null>>,
+  inputContent: string,
+  inputTitle: string,
+  setInputContent: React.Dispatch<React.SetStateAction<string>>,
+  setInputTitle: React.Dispatch<React.SetStateAction<string>>,
+}
+
+
+const Notes = ({notes, setNote, selectedNote, setSelectedNote, inputContent, inputTitle, setInputContent, setInputTitle}: NotesProp) => {
+
+const handleEdit = (note: Note) => {
+  setSelectedNote(note);
+  setInputContent(note.description)
+  setInputTitle(note.title)
+}
+
   return (
     <div className='flex flex-col gap-2 md:w-1/3'>
       <h1 className='font-medium text-3xl p-4 '>Notes</h1>
-      {data.map((note, index) => (
-        <div key={index} className='p-4 flex flex-col gap-2 bg-gray-100 rounded-2xl text-gray-400 relative text-sm'>
+      {notes.map((note) => (
+        <div key={note.id} 
+          className='p-4 flex flex-col gap-2 bg-gray-100 rounded-2xl text-gray-400 relative text-sm'
+          onClick={() => handleEdit(note)}
+        >
           <h2 className='font-medium text-black'>{note.title}</h2>
           <p>{note.description}</p>
           <div className='flex justify-between'>
