@@ -37,6 +37,9 @@ function App() {
   const [inputTitle, setInputTitle] = useState("");
 
   const handleSave = () => {
+  // return if input is empty
+  if (!inputContent) return;
+
   if (selectedNote) {
     // update the note
     setNote(notes.map(note => 
@@ -44,6 +47,11 @@ function App() {
         ?  {...note, title: inputTitle, description: inputContent, time: new Date().toLocaleDateString(), location: "san francisco"}
         : note
     ))
+
+    // clear every data
+    setSelectedNote(null);
+    setInputContent('')
+    setInputTitle('')
   } else {
     // create a new note
     const data = {
@@ -96,6 +104,7 @@ function App() {
               setInputContent={setInputContent}
               setInputTitle={setInputTitle}
               handleSave={handleSave}
+              selectedNote={selectedNote}
             />
           </div>
         </div>

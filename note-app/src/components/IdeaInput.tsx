@@ -2,6 +2,14 @@ import React, { useState, type FC } from 'react'
 import noteIcon from '../assets/noteIcon.png';
 import { FaLightbulb } from "react-icons/fa6";
 
+type Note = {
+  id: number,
+  title: string,
+  description: string,
+  time: string,
+  location: string,
+}
+
 type IdealnputProp = {
   setNote: React.Dispatch<React.SetStateAction<any[]>>;
   inputContent: string,
@@ -9,17 +17,18 @@ type IdealnputProp = {
   setInputContent: React.Dispatch<React.SetStateAction<string>>,
   setInputTitle: React.Dispatch<React.SetStateAction<string>>,
   handleSave: () => void,
+  selectedNote: (Note | null)
 }
 
-const IdeaInput = ({setNote, inputContent, inputTitle, setInputContent, setInputTitle, handleSave} : IdealnputProp) => {
+const IdeaInput = ({setNote, inputContent, inputTitle, setInputContent, setInputTitle, handleSave, selectedNote} : IdealnputProp) => {
   
-  const data = {
-    id: Date.now(),
-    title: inputTitle,
-    description: inputContent,
-    time: new Date().toLocaleDateString(),
-    location: "san francisco"
-  }
+  // const data = {
+  //   id: Date.now(),
+  //   title: inputTitle,
+  //   description: inputContent,
+  //   time: new Date().toLocaleDateString(),
+  //   location: "san francisco"
+  // }
   return (
     <div>
       <div className='flex justify-center'>
@@ -60,7 +69,7 @@ const IdeaInput = ({setNote, inputContent, inputTitle, setInputContent, setInput
               }
               }
             >
-              +
+              {selectedNote == null ?  "+" : "Edit"}
             </button>
             <button className='font-medium bg-gray-200 p-4 rounded-4xl w-12 h-12 flex justify-center items-center'>Aa</button>
         </div>
